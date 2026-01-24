@@ -13,7 +13,8 @@ const Navbar = () => {
 
   const navLinks = ['Home', 'About', 'Projects', 'Skills', 'Education', 'Contact'];
 
-  return (
+ return (
+  <>
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <h1 className="logo">KV</h1>
@@ -33,7 +34,9 @@ const Navbar = () => {
         </button>
       </div>
     </nav>
-  );
+    {isOpen && <div className="menu-overlay" onClick={() => setIsOpen(false)}></div>}
+  </>
+);
 };
 
 const Home = () => {
@@ -1162,6 +1165,23 @@ export default function App() {
           text-decoration: underline;
         }
 
+        .menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-overlay {
+    display: block;
+  }
+}
+
         /* Animations */
         @keyframes float {
           0%, 100% {
@@ -1234,6 +1254,7 @@ export default function App() {
     justify-content: center;
     transition: right 0.3s ease;
     padding: 2rem;
+    z-index: 1001;
   }
 
   .nav-links.active {
