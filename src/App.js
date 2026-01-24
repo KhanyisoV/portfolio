@@ -367,24 +367,48 @@ const Education = () => {
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Message sent! (Demo mode)");
-    setFormData({ name: "", email: "", message: "" });
-  };
+  const [status, setStatus] = useState("");
 
-  return (
-    <section id="contact" className="section dark-section">
-      <div className="container">
-        <h2 className="section-title">Get In Touch</h2>
-        <p className="section-subtitle">
-          Feel free to reach out for collaborations, opportunities, or questions.
-        </p>
-        
-        <div className="contact-content">
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <input
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  
+  try {
+    const response = await fetch("https://formspree.io/f/xpqpkqwv", {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      setStatus("SUCCESS");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus(""), 3000);
+    } else {
+      setStatus("ERROR");
+    }
+  } catch (error) {
+    setStatus("ERROR");
+  }
+};
+
+return (
+  <section id="contact" className="section dark-section">
+    <div className="container">
+      <h2 className="section-title">Get In Touch</h2>
+      <p className="section-subtitle">
+        Feel free to reach out for collaborations, opportunities, or questions.
+      </p>
+      
+      <div className="contact-content">
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <input
               type="text"
+              name="name"
               placeholder="Your Name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -392,18 +416,29 @@ const Contact = () => {
             />
             <input
               type="email"
+              name="email"
               placeholder="Your Email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
             <textarea
+              name="message"
               placeholder="Your Message"
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               required
+              rows="5"
             />
-            <button type="submit" className="btn btn-primary">Send Message</button>
+            <button type="submit" className="btn btn-primary">
+              {status === "SUCCESS" ? "Message Sent! ✓" : "Send Message"}
+            </button>
+            {status === "ERROR" && (
+              <p style={{ color: '#ff6b6b', marginTop: '1rem' }}>
+                Oops! There was an error sending your message.
+              </p>
+            )}
+           
           </form>
 
           <div className="contact-info">
