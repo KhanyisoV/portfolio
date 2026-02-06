@@ -188,6 +188,7 @@ const Projects = () => {
       title: "To-Do List Console App (.NET)",
       tech: ".NET · React · C#",
       image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg",
+      url: "https://lively-meadow-0d1160203.1.azurestaticapps.net",
       description: "A simple C# .NET Console Application built to practice Object-Oriented Programming (OOP) and SOLID principles.",
       highlights: [
         "Smart device integration",
