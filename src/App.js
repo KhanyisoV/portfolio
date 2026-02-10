@@ -129,7 +129,7 @@ const Projects = () => {
       tech: "React.js · ASP.NET Web API · Python · MS SQL",
       description: "Healthcare ML system for diagnosis prediction",
       image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      url: "https://github.com/KhanyisoV/Clinical-Decision-Support-System.git",
+      url: "https://clinical-decision-support-system-fr.vercel.app/login",
       highlights: [
         "Backend system using ASP.NET Web API",
         "Machine Learning integration for diagnosis",
